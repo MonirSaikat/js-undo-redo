@@ -1,27 +1,46 @@
-const MAX_UNDO     = 50;
-let   changes      = [];
-let   currentIndex = 0;
+const MAX_UNDO = 50;
+let changes = [];
+let currentIndex = 0;
 
 function appInstance() {
   return $('#app');
 }
 
-function undo() {
-  if (currentIndex >= 1) currentIndex -= 1;
+function handleEventListeners() {
+  $('.color').on('click', handleColorChange);
+  $('#undo').on('click', undo);
+  $('#redo').on('click', redo);
+}
 
-  const object = changes[currentIndex];
-  setJsonData(object, true);
+function handleColorChange() {
+  const colorCode = $(this).data('value');
+  const jsonData = getJsonData();
+  jsonData.color = colorCode;
+  const copied = {
+    ...jsonData
+  };
+
+  setJsonData(copied);
   updateUI();
 }
 
+function applyChange(index) {
+  const data = changes[index];
+  setJsonData(data, true);
+  updateUI();
+}
+
+function undo() {
+  if (currentIndex >= 1) currentIndex -= 1;
+  applyChange(currentIndex);
+}
+
 function redo() {
-  if(currentIndex < changes.length - 1) {
+  if (currentIndex < changes.length - 1) {
     currentIndex++;
   }
 
-  const object = changes[currentIndex];
-  setJsonData(object, true);
-  updateUI();
+  applyChange(currentIndex);
 }
 
 function getJsonData() {
@@ -50,8 +69,7 @@ function setJsonData(data, undoRedo = false) {
 function updateUI(init = false) {
   const json = getJsonData();
 
-
-  if(init) changes = [JSON.parse(JSON.stringify(json))];
+  if (init) changes = [JSON.parse(JSON.stringify(json))];
 
   appInstance().css({
     'width': '100px',
@@ -59,32 +77,26 @@ function updateUI(init = false) {
     'background-color': json.color
   });
 
-  if(currentIndex == 0) {
+  toggleButtons();
+}
+
+function toggleButtons() {
+  if (currentIndex == 0) {
     $('#undo').attr('disabled', 'disabled');
   } else {
     $('#undo').removeAttr('disabled');
   }
-  
-  if(currentIndex == changes.length - 1) {
+
+  if (currentIndex == changes.length - 1) {
     $('#redo').attr('disabled', 'disabled');
   } else {
     $('#redo').removeAttr('disabled');
   }
 }
 
-updateUI(true);
+function initApp() {
+  updateUI(true);
+  handleEventListeners();
+}
 
-$('.color').on('click', function () {
-  const colorCode = $(this).data('value');
-  const jsonData = getJsonData();
-  jsonData.color = colorCode;
-  const copied = {
-    ...jsonData
-  };
-
-  setJsonData(copied);
-  updateUI();
-});
-
-$('#undo').on('click', undo);
-$('#redo').on('click', redo);
+$(document).ready(initApp);
