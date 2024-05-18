@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Undo & Redo</title>
+  <style>
+    :disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" data-json='{"color": "red"}'></div>
+  
+  <br><br>  
+  
+  <button class="color" data-value="red">Red</button>
+  <button class="color" data-value="blue">Blue</button>
+  <button class="color" data-value="green">Green</button>
+  <button class="color" data-value="purple">Purple</button>
+  <button class="color" data-value="orange">Orange</button>
+  <button class="color" data-value="brown">Brown</button>
+
+  <br>
+  <br>
+  <button id="undo">
+    <svg id='Undo_24' width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><rect width='24' height='24' stroke='none' fill='#000000' opacity='0'/>
+      <g transform="matrix(0.91 0 0 0.91 12 12)" >
+      <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" transform=" translate(-15, -14)" d="M 10 3 L 4 9 L 10 15 L 10 11 L 17 11 C 19.785124 11 22 13.214876 22 16 C 22 18.785124 19.785124 21 17 21 L 14 21 C 13.278728166844862 20.98979942090903 12.607837270856786 21.368750592338664 12.244224557026966 21.991745699428662 C 11.880611843197144 22.61474080651866 11.880611843197146 23.385259193481343 12.244224557026968 24.00825430057134 C 12.607837270856788 24.631249407661336 13.278728166844862 25.01020057909097 14.000000000000002 25 L 17 25 C 21.67453 25 25.431086 21.342021 25.84375 16.769531 C 25.946166415677112 16.525864028400704 25.999272923983117 16.264314559964042 26 16 C 26 11.053124 21.946876 7 17 7 L 10 7 L 10 3 z" stroke-linecap="round" />
+      </g>
+      </svg>
+  </button>
+  <button id="redo"><svg id='Redo_24' width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><rect width='24' height='24' stroke='none' fill='#000000' opacity='0'/>
+
+
+    <g transform="matrix(0.91 0 0 0.91 12 12)" >
+    <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" transform=" translate(-15, -14)" d="M 20 3 L 20 7 L 13 7 C 8.053124 7 4 11.053124 4 16 C 4.00004668836034 16.267735761448066 4.053844003449697 16.53273743497527 4.1582031 16.779297 C 4.158202782181013 16.77994799996121 4.1582027821810135 16.78059900003879 4.1582031 16.78125 C 4.5765992 21.347984 8.3295881 25 13 25 L 16 25 C 16.72127183315514 25.01020057909097 17.392162729143212 24.631249407661336 17.755775442973032 24.008254300571338 C 18.119388156802856 23.385259193481343 18.119388156802856 22.61474080651866 17.755775442973032 21.991745699428662 C 17.392162729143212 21.368750592338664 16.72127183315514 20.98979942090903 16 21 L 13 21 C 10.214876 21 8 18.785124 8 16 C 8 13.214876 10.214876 11 13 11 L 20 11 L 20 15 L 26 9 L 20 3 z" stroke-linecap="round" />
+    </g>
+    </svg></button>
+  
+
+  <script src="./jquery.min.js"></script>
+  <script src="./main.js"></script>
+</body>
+</html>
