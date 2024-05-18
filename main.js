@@ -94,9 +94,24 @@ function toggleButtons() {
   }
 }
 
+function handleKeyboardShortcuts() {
+  $(document).on('keydown', function (event) {
+    event.preventDefault();
+
+    if (event.ctrlKey && event.key == 'z') {
+      undo();
+    }
+
+    if (event.ctrlKey && event.key == 'y') {
+      redo();
+    }
+  });
+}
+
 function initApp() {
   updateUI(true);
   handleEventListeners();
+  handleKeyboardShortcuts();
 }
 
 $(document).ready(initApp);
